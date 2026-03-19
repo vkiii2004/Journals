@@ -1,52 +1,68 @@
-Journal Management Application
-Tech Stack
-Java 17
-Spring Boot
-Spring Security
-Spring Data JPA (Hibernate)
-MySQL
-Maven
-Features
-User registration and authentication
-Role-based access control (ADMIN / USER)
-CRUD operations on journal entries
-Secure REST APIs
-Global exception handling
-DTO-based request/response handling
-Security Flow
-Authentication handled using Spring Security
-User details loaded via UserDetailsServiceImpl
-Passwords stored using BCrypt
-Role-based endpoint access:
-PUBLIC APIs → no authentication
-USER APIs → authenticated users
-ADMIN APIs → admin only
-Sample APIs
-Create Journal Entry (USER)
-POST /api/journal Authorization: Bearer { "title": "My Day", "content": "Learned Spring Security" }
+# Journal App
 
-shell Copy code
+Small Spring Boot monolith for a simple journal application (Java + Maven).
 
-Get All Entries
-GET /api/journal
+## Overview
 
-shell Copy code
+This project is a basic Spring Boot application that provides user and journal-entry management via controllers, entities, repositories, and services. It includes a Maven wrapper so you can build and run without installing Maven system-wide.
 
-Health Check
-GET /health
+## Prerequisites
 
-markdown Copy code
+- Java 11 or newer installed
+- Git (optional)
 
-Database Schema
-User
+## Build
 
-id (PK)
-username
-password
-role
-JournalEntry
+On Windows (from project root):
 
-id (PK)
-title
-content
-user_id (FK)
+```powershell
+./mvnw.cmd clean package
+```
+
+On macOS / Linux:
+
+```bash
+./mvnw clean package
+```
+
+## Run
+
+Run with Maven:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Or run the packaged jar (after `package`):
+
+```bash
+java -jar target/*.jar
+```
+
+## Tests
+
+Run unit tests with:
+
+```bash
+./mvnw test
+```
+
+## Configuration
+
+Application properties are in `src/main/resources/application.properties`. Update database or other settings there.
+
+## Project layout (key folders)
+
+- `src/main/java/com/project/journalApp/controller` : Spring MVC controllers
+- `src/main/java/com/project/journalApp/entity` : JPA entities (`User`, `JournalEntry`)
+- `src/main/java/com/project/journalApp/repository` : Spring Data repositories
+- `src/main/java/com/project/journalApp/service` : Service layer implementations
+
+## Notes
+
+- This repo contains a Maven wrapper (`mvnw` / `mvnw.cmd`) so you can build with the included scripts.
+- If you want, I can add example environment variables, Dockerfile, or run instructions for a specific database.
+
+---
+
+Created for quick onboarding. Enjoy!
